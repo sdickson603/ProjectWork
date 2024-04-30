@@ -3,12 +3,7 @@ import {client, connect} from './db.js';
 const dbName = 'usersdb';
 const collectionName = 'users';
 connect(); // Connect to MongoDB
-
 const router = express.Router();
-import {client, connect} from './db.js';
-const dbName = 'usersdb';
-const collectionName = 'users';
-connect(); // Connect to MongoDB
 
 router.get('/', async (req, res) => {
     try {
