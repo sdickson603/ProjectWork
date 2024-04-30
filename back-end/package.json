@@ -6,14 +6,15 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "mongodb": "C:/Software/MongoDB/Server/6.0/bin/mongod",
-    "mongosh": "C:/Software/mongosh/mongosh-1.8.0-win32-x64/bin/mongosh"
+    "mongodb": "C:/Software/MongoDB/Server/7.0/bin/mongod",
+    "mongosh": "C:/Software/mongosh/bin/mongosh"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
-    "mongodb": "^6.5.0"
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.3"
   }
 }

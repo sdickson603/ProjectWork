@@ -5,6 +5,10 @@ const collectionName = 'users';
 connect(); // Connect to MongoDB
 
 const router = express.Router();
+import {client, connect} from './db.js';
+const dbName = 'usersdb';
+const collectionName = 'users';
+connect(); // Connect to MongoDB
 
 router.get('/', async (req, res) => {
     try {
@@ -13,9 +17,10 @@ router.get('/', async (req, res) => {
         const prj = {user:1,email:1, _id:0};
         const users = await collection.find({}).project(prj).toArray();
         res.json(users);
-    } catch (err) {
+
+        } catch (err) {
         res.status(500).json({ error: err.message });
-    }
+        }    
 });
 
 router.post('/authenticate', async (req, res) => {
