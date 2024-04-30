@@ -1,5 +1,17 @@
 [
   {
+    "queryName": "Query04",
+    "q": "state",
+    "language": "en",
+    "pageSize": 10
+  },
+  {
+    "queryName": "Query02",
+    "q": "person",
+    "language": "en",
+    "pageSize": 10
+  },
+  {
     "queryName": "query01",
     "language": "en",
     "pageSize": 10,
