@@ -1,8 +1,9 @@
+
 import { QueryForm } from './QueryForm';
 import { Articles } from './Articles';
 import { useState, useEffect } from 'react';
-import { exampleQuery, exampleData } from './data';
 import { SavedQueries } from './SavedQueries';
+import { exampleQuery, exampleData } from './data';
 import { LoginForm } from './LoginForm';
 
 export function NewsReader() {
@@ -16,27 +17,12 @@ export function NewsReader() {
   const urlQueries = "/queries"
   const urlUsersAuth = "/users/authenticate";
 
-
-
-
   useEffect(() => {
     getNews(query);
   }, [query])
 
   useEffect(() => { getQueryList(); }, [])
 
-  async function getQueryList() {
-    try {
-      const response = await fetch(urlQueries);
-      if (response.ok) {
-        const data = await response.json();
-        console.log("savedQueries has been retrieved: ");
-        setSavedQueries(data);
-      }
-    } catch (error) {
-      console.error('Error fetching news:', error);
-    }
-  }
 
 
   async function login() {
@@ -65,6 +51,18 @@ export function NewsReader() {
     }
   }
 
+  async function getQueryList() {
+    try {
+      const response = await fetch(urlQueries);
+      if (response.ok) {
+        const data = await response.json();
+        console.log("savedQueries has been retrieved: ");
+        setSavedQueries(data);
+      }
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    }
+  }
 
   async function saveQueryList(savedQueries) {
     try {
@@ -83,13 +81,31 @@ export function NewsReader() {
     }
   }
 
-
   function onSavedQuerySelect(selectedQuery) {
     setQueryFormObject(selectedQuery);
     setQuery(selectedQuery);
   }
 
+  function currentUserMatches(user) {
+    if (currentUser) {
+      if (currentUser.user) {
+        if (currentUser.user === user) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   function onFormSubmit(queryObject) {
+    if (currentUser === null) {
+      alert("Log in if you want to create new queries!")
+      return;
+    }
+    if (savedQueries.length >= 3 && currentUserMatches("guest")) {
+      alert("guest users cannot submit new queries once saved query count is 3 or greater!")
+      return;
+    }
     let newSavedQueries = [];
     newSavedQueries.push(queryObject);
     for (let query of savedQueries) {
@@ -97,7 +113,6 @@ export function NewsReader() {
         newSavedQueries.push(query);
       }
     }
-    console.log(JSON.stringify(newSavedQueries));
     saveQueryList(newSavedQueries);
     setSavedQueries(newSavedQueries);
     setQuery(queryObject);
@@ -136,13 +151,15 @@ export function NewsReader() {
           <div className="box">
             <span className='title'>Query Form</span>
             <QueryForm
+              currentUser={currentUser}
               setFormObject={setQueryFormObject}
               formObject={queryFormObject}
               submitToParent={onFormSubmit} />
           </div>
           <div className="box">
             <span className='title'>Saved Queries</span>
-            <SavedQueries savedQueries={savedQueries}
+            <SavedQueries
+              savedQueries={savedQueries}
               selectedQueryName={query.queryName}
               onQuerySelect={onSavedQuerySelect} />
           </div>

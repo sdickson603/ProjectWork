@@ -1,0 +1,38 @@
+[
+  {
+    "queryName": "Query04",
+    "q": "work",
+    "language": "en",
+    "pageSize": 10
+  },
+  {
+    "queryName": "Query03",
+    "q": "work",
+    "language": "en",
+    "pageSize": 10
+  },
+  {
+    "queryName": "Query02",
+    "q": "work",
+    "language": "en",
+    "pageSize": 10
+  },
+  {
+    "queryName": "Query01",
+    "q": "work",
+    "language": "en",
+    "pageSize": 10
+  },
+  {
+    "queryName": "query01",
+    "language": "en",
+    "pageSize": 10,
+    "q": "news"
+  },
+  {
+    "queryName": "query02",
+    "language": "en",
+    "pageSize": 10,
+    "q": "build"
+  }
+]
