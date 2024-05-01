@@ -1,5 +1,11 @@
 [
   {
+    "queryName": "Query01",
+    "q": "work",
+    "language": "en",
+    "pageSize": 10
+  },
+  {
     "queryName": "Query04",
     "q": "work",
     "language": "en",
@@ -13,12 +19,6 @@
   },
   {
     "queryName": "Query02",
-    "q": "work",
-    "language": "en",
-    "pageSize": 10
-  },
-  {
-    "queryName": "Query01",
     "q": "work",
     "language": "en",
     "pageSize": 10

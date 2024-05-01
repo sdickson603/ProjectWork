@@ -163,9 +163,12 @@ export function NewsReader() {
               selectedQueryName={query.queryName}
               onQuerySelect={onSavedQuerySelect} />
           </div>
-          <div className="box">
+          <div className="box" style={{ overflow: 'hidden', overflowX: 'scroll', overflowY: 'scroll', height: '300px', width: '400px' }}>
+           {/* Extra credit #3 adding a scroll bar for overflow, parent wrapper below */}
             <span className='title'>Articles List</span>
+            <div className="parent" style={{ overflow: 'auto', height: '100%' }}>
             <Articles query={query} data={data} />
+          </div>
           </div>
         </section>
       </div>
