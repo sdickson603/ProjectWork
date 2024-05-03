@@ -1,14 +1,8 @@
 [
   {
     "queryName": "Query01",
-    "q": "work",
+    "q": "Andy",
     "language": "en",
     "pageSize": 10
-  },
-  {
-    "queryName": "Query02",
-    "q": "news",
-    "language": "en",
-    "pageSize": "16"
   }
 ]

@@ -13,22 +13,27 @@ export function NewsReader() {
   const [savedQueries, setSavedQueries] = useState([{ ...exampleQuery }]);
   const [currentUser, setCurrentUser] = useState(null);
   const [credentials, setCredentials] = useState({ user: "", password: "" });
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const urlNews = "/news"
   const urlQueries = "/queries"
   const urlUsersAuth = "/users/authenticate";
+  const defaultQueries = [
+    { queryName: "World News", q: "World News" },
+    { queryName: "Sports", q: "Sports" },
+    { queryName: "Technology", q: "Technology" },
+  ];/* adding this as part of function #4 */
 
   useEffect(() => {
     getNews(query);
   }, [query])
 
-  useEffect(() => { getQueryList(); }, [])
-
-
+  /*useEffect(() => { getQueryList(); }, []) /Removing this to add feature #4*/
 
   async function login() {
     if (currentUser !== null) {
       // logout
       setCurrentUser(null);
+      setIsUserLoggedIn(false);
     } else {
       // login
       try {
@@ -39,9 +44,10 @@ export function NewsReader() {
         });
         if (response.status === 200) {
           setCurrentUser({ ...credentials });
+          setIsUserLoggedIn(true);
           setCredentials({ user: "", password: "" });
         } else {
-          alert("Error during authentication! " + credentials.user + "/" + credentials.password);
+          alert("Oh no! Did you mean to log in?" + credentials.user + credentials.password);
           setCurrentUser(null);
         }
       } catch (error) {
@@ -51,18 +57,23 @@ export function NewsReader() {
     }
   }
 
-  async function getQueryList() {
-    try {
-      const response = await fetch(urlQueries);
-      if (response.ok) {
-        const data = await response.json();
-        console.log("savedQueries has been retrieved: ");
-        setSavedQueries(data);
-      }
-    } catch (error) {
-      console.error('Error fetching news:', error);
-    }
-  }
+
+ 
+
+
+
+  /* async function getQueryList() {
+     try {
+       const response = await fetch(urlQueries);
+       if (response.ok) {
+         const data = await response.json();
+         console.log("savedQueries has been retrieved: ");
+         setSavedQueries(data);
+       }
+     } catch (error) {
+       console.error('Error fetching news:', error);
+     }
+   } /commenting this out to add feature #4*/
 
   async function saveQueryList(savedQueries) {
     try {
@@ -148,7 +159,7 @@ export function NewsReader() {
         setCredentials={setCredentials} />
       <div >
         <section className="parent" >
-          <div className="box" style={{ overflow: 'auto', overflowX: 'scroll', overflowY: 'scroll'}}>
+          <div className="box" style={{ overflow: 'auto', overflowX: 'scroll', overflowY: 'scroll' }}>
             <span className='title'>Query Form</span>
             <QueryForm
               currentUser={currentUser}
@@ -156,16 +167,17 @@ export function NewsReader() {
               formObject={queryFormObject}
               submitToParent={onFormSubmit} />
           </div>
-          <div className="box" style={{ overflow: 'auto', overflowX: 'scroll', overflowY: 'scroll'}}>
+          <div className="box" style={{ overflow: 'auto', overflowX: 'scroll', overflowY: 'scroll' }}>
             <span className='title'>Saved Queries</span>
             <SavedQueries
-              savedQueries={savedQueries}
+              savedQueries={isUserLoggedIn ? savedQueries : defaultQueries} /*adding this as part of feature 4*/
               selectedQueryName={query.queryName}
-              onQuerySelect={onSavedQuerySelect} />
+              onQuerySelect={onSavedQuerySelect}  
+            />
           </div>
           <div className="box" style={{ overflow: 'auto', overflowX: 'scroll', overflowY: 'scroll' }}>
-           {/* Extra credit #3 adding a scroll bar for overflow, parent wrapper below */}
-            <span className='title'>Articles List</span>            
+            {/* Extra credit #3 adding a scroll bar for overflow, parent wrapper below */}
+            <span className='title'>Articles List</span>
             <Articles query={query} data={data} />
           </div>
         </section>
