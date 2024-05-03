@@ -11,6 +11,8 @@ ol{
 
 header,p{
   font-weight:bold;
+  text-align: center;
+  background-image: url("https://img.freepik.com/premium-photo/vintage-old-newspaper-grunge-texture-background-retro-paper_916191-188489.jpg?w=996");
 }
 
 .selected {

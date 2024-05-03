@@ -148,7 +148,7 @@ export function NewsReader() {
         setCredentials={setCredentials} />
       <div >
         <section className="parent" >
-          <div className="box">
+          <div className="box" style={{ overflow: 'auto', overflowX: 'scroll', overflowY: 'scroll'}}>
             <span className='title'>Query Form</span>
             <QueryForm
               currentUser={currentUser}
@@ -156,19 +156,17 @@ export function NewsReader() {
               formObject={queryFormObject}
               submitToParent={onFormSubmit} />
           </div>
-          <div className="box">
+          <div className="box" style={{ overflow: 'auto', overflowX: 'scroll', overflowY: 'scroll'}}>
             <span className='title'>Saved Queries</span>
             <SavedQueries
               savedQueries={savedQueries}
               selectedQueryName={query.queryName}
               onQuerySelect={onSavedQuerySelect} />
           </div>
-          <div className="box" style={{ overflow: 'hidden', overflowX: 'scroll', overflowY: 'scroll', height: '300px', width: '400px' }}>
+          <div className="box" style={{ overflow: 'auto', overflowX: 'scroll', overflowY: 'scroll' }}>
            {/* Extra credit #3 adding a scroll bar for overflow, parent wrapper below */}
-            <span className='title'>Articles List</span>
-            <div className="parent" style={{ overflow: 'auto', height: '100%' }}>
+            <span className='title'>Articles List</span>            
             <Articles query={query} data={data} />
-          </div>
           </div>
         </section>
       </div>
